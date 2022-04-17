@@ -11,14 +11,20 @@ from django.http import HttpResponse
 from importlib import reload
 from django.shortcuts import render
 from mysite.wsgi import *
+
 def home(request):
     # GateDB.receiveServer(1)
     # GateDB.receiveServer(2)
+    # data=readfile()
+    data_file = open('polls/static/txt/bienso.txt', 'r')       
+    data = data_file.read()
+    print(data)
+    data_file.close()
     CamDB.updateCam(1,"static/image/gg.jpg","123")
     rec1 = Gate.objects.get(id=1)
     rec2 = Gate.objects.get(id=2)
     rec3=Cam.objects.get(id=1)
-    context = {"item1": rec1,"item2": rec2, "item3":rec3}
+    context = {"item1": rec1,"item2": rec2, "item3":rec3, 'file_content': data}
     return render(request, "home.html", context)
 
 
