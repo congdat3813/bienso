@@ -14,6 +14,7 @@ from mysite.wsgi import *
 def home(request):
     # GateDB.receiveServer(1)
     # GateDB.receiveServer(2)
+    CamDB.updateCam(1,"static/image/gg.jpg","123")
     rec1 = Gate.objects.get(id=1)
     rec2 = Gate.objects.get(id=2)
     rec3=Cam.objects.get(id=1)

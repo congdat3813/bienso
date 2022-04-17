@@ -81,19 +81,19 @@ class Gate(models.Model):
         super().save()
 class CamDB:
     @staticmethod
-    def update(img,time,bienso):
-        Cam.objects.get(id=1).update(img,time,bienso)
+    def updateCam(id,img,bienso):
+        Cam.objects.get(id=id).update(img,bienso)
 
 class Cam(models.Model):
     id_gate = models.ForeignKey(Gate, on_delete=models.CASCADE)
     img = models.ImageField(upload_to=None, height_field=None,width_field=None, max_length=100,blank=True)
-    imgtime = models.DateTimeField(default=timezone.now)
+    imgtime = models.DateTimeField()
     bienso=models.CharField(max_length=10)
-    def update(self,img,imgtime,bienso):
+    def update(self,img,bienso):
         self.img=img
-        self.imgtime=imgtime
-        bienso= bienso
-      
+        self.bienso= bienso
+        self.imgtime = timezone.now()
+        super(Cam,self).save()
 class CustomerDB:
     @staticmethod
     def get_cus_list():
