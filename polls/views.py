@@ -11,8 +11,9 @@ from django.http import HttpResponse
 from importlib import reload
 from django.shortcuts import render
 from mysite.wsgi import *
-
 def home(request):
+    return render(request, "t/homepage.html")
+def gate(request):
     # GateDB.receiveServer(1)
     # GateDB.receiveServer(2)
     # data=readfile()
@@ -25,22 +26,27 @@ def home(request):
     rec2 = Gate.objects.get(id=2)
     rec3=Cam.objects.get(id=1)
     context = {"item1": rec1,"item2": rec2, "item3":rec3, 'file_content': data}
-    return render(request, "home.html", context)
+    return render(request, "t/gate.html", context)
 
 
 def Open(request):
     import json
     id = json.loads(request.body)
-    print("id: ",id)
-    GateDB.updateServer(id,'1')
+    if id==1:
+        GateDB.updateServer(id,'1')
+    elif id==2:
+        GateDB.updateServer(id,'3')
+    
     # redirect('polls/home/')
     return JsonResponse(True, safe=False)
 
 def Close(request):
     import json
     id = json.loads(request.body)
-    print("id: ",id)
-    GateDB.updateServer(id,'0')
+    if id==1:
+        GateDB.updateServer(id,'0')
+    elif id==2:
+        GateDB.updateServer(id,'2')
     # redirect('polls/home/')
     return JsonResponse(True, safe=False)
 
@@ -54,17 +60,17 @@ def updateGatetoServer(request):
             GateDB.updateServer(1,state)
         if id == "2":
             aio.send('microbit-led', state)
-    return redirect('/home/')
+    return redirect('/gate/')
 
 def customer(request):
     rec = Customer.objects.all()
     context = {"item": rec}
-    return render(request, "customer.html", context)
+    return render(request, "t/cus.html", context)
 
 def cus_info(request, id):
     rec = Customer.objects.get(id=id)
     context = {"item": rec}
-    return render(request, "cus_info.html", context)
+    return render(request, "t/cus_info.html", context)
 
 def updatecus(request, id):
     if request.method == 'POST':
@@ -75,7 +81,17 @@ def updatecus(request, id):
         bienso = request.POST.get('bienso')
         sogiayto = request.POST.get('sogiayto')
         CustomerDB.update_cus(id,phone,bdate,name,cmnd,bienso,sogiayto)
-        return redirect('customer/<int:id>/')
+        return redirect('cus/<int:id>/')
+
+# def history(request):
+#     rec = Parking.objects.all()
+#     context = {"item": rec}
+#     return render(request, "history.html", context)
+
+# def his_info(request,id):
+#     rec = Parking.objects.get(id=id)
+#     context = {"item": rec}
+#     return render(request, "his_info.html", context)
 
 
     

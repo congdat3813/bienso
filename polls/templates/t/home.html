@@ -1,0 +1,68 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<form>{% csrf_token %}
+    {% comment %} <img src="{% static 'image/image1.jpeg' %}" width="200" height="200"/> {% endcomment %}
+    <img src="{{ item3.img.url }}"width="200" height="200"/>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>:</td>
+            <td>{{ item2.dvname }}</td>
+            <td>{{ file_content }}</td>
+        </tr>
+        <tr> 
+            <td>ID</td>
+            <td>:</td>
+            <td>{{ item2.id }}</td>
+        </tr>
+        <tr>
+            <td>State</td>
+            <td>:</td>
+            <td>{% if item2.state == 1 %} Mở
+                {% else %} Đóng
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+    <button onclick="Open({{ item2.id }})" style="width:10%;text-align:center;">Mở</button>
+    <button onclick="Close({{ item2.id }})" style="width:10%;text-align:center;">Đóng</button>
+</form>
+</body>
+<script>
+    function Open(id) {
+        var url = '/polls/Open/';
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            body: JSON.stringify(id)
+        }).then(res => {
+            return res.json();
+        }
+        ).then((data) => {
+            if (data == true) {
+              }
+              else { alert(data + ' Out of material!!!') }
+        });
+    }
+    function Close(id) {
+        var url = '/polls/Close/';
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            body: JSON.stringify(id)
+        }).then(res => {
+            return res.json();
+        }
+        ).then((data) => {
+            if (data == true) {
+              }
+              else { alert(data + ' Out of material!!!') }
+        });
+    }
+</script>
+{% endblock content %}
