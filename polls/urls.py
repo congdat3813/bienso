@@ -9,6 +9,6 @@ urlpatterns = [
      path('Close/', Close, name='close'),
      path('cus/', customer, name='cus'),
      # path('cus/<int:id>/', cus_info, name='cus_info'),
-     # path('history/', history, name='history'),
+     path('history/', history, name='history'),
      # path('history/<int:id>/', his_info, name='history'),
 ]

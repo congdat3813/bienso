@@ -83,10 +83,10 @@ def updatecus(request, id):
         CustomerDB.update_cus(id,phone,bdate,name,cmnd,bienso,sogiayto)
         return redirect('cus/<int:id>/')
 
-# def history(request):
-#     rec = Parking.objects.all()
-#     context = {"item": rec}
-#     return render(request, "history.html", context)
+def history(request):
+    rec = Parking.objects.all()
+    context = {"item": rec}
+    return render(request, "t/history.html", context)
 
 # def his_info(request,id):
 #     rec = Parking.objects.get(id=id)
