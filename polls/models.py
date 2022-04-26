@@ -8,7 +8,7 @@ from Adafruit_IO import MQTTClient
 
 AIO_FEED_ID = "microbit-led"
 AIO_USERNAME = "t2001kiet"
-AIO_KEY = "aio_AOZg71iEJaDvZpNkqFaLKRnq99on"
+AIO_KEY = "aio_wURr66XZ3evEAgOAX1tCGYsU1du4"
 
 def connected(client):
     print("Ket noi thanh cong ...")
@@ -99,14 +99,14 @@ class Gate(models.Model):
         super().save()
 class CamDB:
     @staticmethod
-    def updateCam(id,img,bienso):
-        Cam.objects.get(id=id).update(img,bienso)
+    def updateCam(id_gate,img,bienso):
+        Cam.objects.get(id_gate=id_gate).update(img,bienso)
 
 class Cam(models.Model):
-    id_gate = models.ForeignKey(Gate, on_delete=models.CASCADE)
-    img = models.ImageField(upload_to=None, height_field=None,width_field=None, max_length=100,blank=True)
+    id_gate = models.IntegerField() 
+    img = models.ImageField(height_field=None,width_field=None, max_length=100,blank=True)
     imgtime = models.DateTimeField()
-    bienso=models.CharField(max_length=10)
+    bienso=models.CharField(max_length=15)
     def update(self,img,bienso):
         self.img=img
         self.bienso= bienso
@@ -126,16 +126,16 @@ class CustomerDB:
         Customer.objects.get(id=id_cus).update(phone=phone,bdate=bdate,name=name,cmnd=cmnd,bienso=bienso,sogiayto=sogiayto)
 
 class Customer(models.Model):
-    phone = models.CharField(max_length=10)
-    bdate= models.DateField()
     name = models.CharField(max_length=255)
+    avt =  models.ImageField(upload_to='static/image/people',height_field=None,width_field=None, max_length=100,blank=True)
+    bdate= models.DateField()
+    phone = models.CharField(max_length=10)
     cmnd = models.CharField(max_length=15)
-    bienso = models.CharField(max_length=10)
-    anhbien = models.ImageField(upload_to=None, height_field=None,width_field=None, max_length=100,blank=True)
-    sogiayto = models.CharField(max_length=255)
-    anhgiayto1 = models.ImageField(upload_to=None, height_field=None,width_field=None, max_length=100,blank=True)
-    anhgiayto2= models.ImageField(upload_to=None, height_field=None,width_field=None, max_length=100,blank=True)
-    anhxe = models.CharField(max_length=255,blank=True)
+    
+    bienso = models.CharField(max_length=15)
+    anhbien =  models.ImageField(upload_to='static/image/bks',height_field=None,width_field=None, max_length=100,blank=True)
+    sogiayto = models.CharField(max_length=255,blank=True)
+    anhxe =  models.ImageField(upload_to='static/image/xe',height_field=None,width_field=None, max_length=100,blank=True)
     
     def update(self,phone,bdate,name,cmnd,bienso,sogiayto):
         self.phone = phone
@@ -152,7 +152,12 @@ class ParkingDB:
         Parking.objects.create(id_cus=id_cus, id_gate=id_gate, imgtime=imgtime, bienso=bienso)
                 
 class Parking(models.Model):
-    id_cus= models.ForeignKey(Customer, on_delete=models.CASCADE)    
-    id_gate = models.ForeignKey(Gate, on_delete=models.CASCADE)       
+    id_cus= models.IntegerField()   
+    id_gate = models.IntegerField()     
     imgtime = models.DateTimeField(default=timezone.now)
-    bienso=models.CharField(max_length=10)
+    bienso=models.CharField(max_length=15)
+      
+class Bienso(models.Model):
+    bienso = models.CharField(max_length=15)
+    def updatebien(self,bienso):
+        self.bienso=bienso

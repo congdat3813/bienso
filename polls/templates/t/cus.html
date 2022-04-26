@@ -69,14 +69,17 @@
           {% for i in item %}
           <tr>
             <td>{{i.id}}</td>
-            <td>{{ i.name }}</td>
-            <td>{{ i.bienso }}</td>
+            <td><a style="text-decoration: none; color: black" href="./{{i.id}}">{{ i.name }}</a></td>
+            <td><a style="text-decoration: none; color: black" href="./{{i.id}}">{{ i.bienso }}</a></td>
+            <td><a href="../delete/{{i.id}}" class="btn btn-danger" id = '{{i.id}}'>delete</a></td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
+      <a href="../../polls/cus_create" class="btn btn-lg btn-warning">Thêm khách hàng</a>
     </div>
   </main>
+  
 </div>
 
 

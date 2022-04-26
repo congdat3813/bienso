@@ -1,0 +1,176 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <title>DCVT Security</title>
+
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/cover/">
+        <link href="{%static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        
+
+        <style>
+            .bd-placeholder-img {
+                font-size: 1.125rem;
+                text-anchor: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                user-select: none;
+            }
+        
+             @media (min-width: 768px) {
+                .bd-placeholder-img-lg {
+                  font-size: 3.5rem;
+                }
+            }
+        </style>
+        <link href="{%static 'css/cover.css' %}" rel="stylesheet">
+    </head>
+
+    <div class="d-flex h-100 text-center text-white bg-dark">
+      <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+          <div>
+            <h3 class="float-md-start mb-0">DCVT</h3>
+            <nav class="nav nav-masthead justify-content-center float-md-end">
+              <a class="nav-link" aria-current="page" href="../../polls/home">Homepage</a>
+              <a class="nav-link" href="../../polls/gate">Cổng kiểm soát</a>
+              <a class="nav-link active" href="../../polls/cus">Thông tin khách hàng</a>
+              <a class="nav-link" href="../../polls/history">Lịch sử</a>
+            </nav>
+          </div>
+        </header>
+      </div>
+    </div>
+    <body>
+    {% comment %} <form method = 'POST' enctype="multipart/form-data">
+      {% csrf_token %}
+          <div class="main-body">
+            <div class="row gutters-sm" style="padding:20px">
+              <div class="col-md-4 mb-3">
+                        <div class="card mb-3">
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <h6 class="mb-0">Họ và tên</h6>
+                              </div>
+                              <div class="col-sm-9 text-secondary">
+                                {{upload.name}}
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <h6 class="mb-0">Ngày sinh</h6>
+                              </div>
+                              <div class="col-sm-9 text-secondary">
+                                {{upload.bdate}}
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <h6 class="mb-0">Số điện thoại</h6>
+                              </div>
+                              <div class="col-sm-9 text-secondary">
+                                {{upload.phone}}
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <h6 class="mb-0">CMND</h6>
+                              </div>
+                              <div class="col-sm-9 text-secondary">
+                                {{upload.cmnd}}
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                              <div class="col-sm-3">
+                                <h6 class="mb-0">Ảnh đại diện</h6>
+                              </div>
+                              <div class="col-sm-9 text-secondary">
+                                {{upload.avt}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      
+              </div>
+
+              <div class="col-md-8">
+                <div class="card mb-3">
+                  <div class="card-body">
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="mb-0">Thông tin phương tiện</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                            </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="mb-0">Biển kiểm soát</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                              {{upload.bienso}}
+                            </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="mb-0">Giấy tờ xe số</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                              {{upload.sogiayto}}
+                            </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="mb-0">Ảnh biển số</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                              {{upload.anhbien}}
+                            </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="mb-0">Ảnh xe</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                              {{upload.anhxe}}
+                            </div>
+                          </div>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="col-sm-12">
+                <button type="submit" class="btn btn-lg btn-warning">Đồng ý</button>
+              </div>
+            </div>
+          </div>
+      </div> {% endcomment %}
+      <center>
+        <form method = 'POST' enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1 class="display-3" style="padding-top:20px;">Thêm khách hàng</h1>
+            <table class = 'w-50 table table-light' style="border-radius:10px;background-color:#FFFF99;">
+                {% for field in upload_form %}
+                <tr>
+                    <th>{{field.label}}</th>
+                    <td>{{ field }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <button type="submit" class="btn btn-lg btn-warning">Đồng ý</button>
+        </form>
+    </center>
+    </body>
+</html>

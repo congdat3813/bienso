@@ -54,24 +54,32 @@
                 <div class="h-100 p-5 bg-light border rounded-3">
                   <h2 style="text-align:center">Cổng vào</h2>
                   <div class="container">
-                    <img src="{{ item3.img.url }}" width="400" height=auto;/>
+                    <img src="{{cam1.img.url}}" width="400" height=auto;/>
                   </div>
-                  <h5>Biển kiểm soát: {{ file_content }}</h5>
-                  <h5>Tên người dùng: {{ item1.dvname }}</h5>
-                  <button class="btn btn-outline-secondary" onclick="Open({{ item1.id }})" >Mở</button>
-                  <button class="btn btn-outline-secondary" onclick="Close({{ item1.id }})" >Đóng</button>
+                  <form method = 'POST' enctype="multipart/form-data">
+                    {% csrf_token %}
+                  <hr>
+                  <h5>Biển kiểm soát: {{ bien1_form.bienso }}</h5>
+                  <h5>Tên người dùng: {{ cus1.name }}</h5>
+                  <button class="btn btn-outline-secondary" onclick="Open(1)" >Mở</button>
+                  <button class="btn btn-outline-secondary" onclick="Close(1)" >Đóng</button>
+                  <button type="submit" class="btn btn-outline-secondary">Chỉnh sửa</button>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="h-100 p-5 bg-light border rounded-3">
                   <h2 style="text-align:center">Cổng ra</h2>
                   <div class="container">
-                    <img src="{{ item3.img.url }}" width="400" height=auto;/>
+                    <img src="{{cam2.img.url}}" width="400" height=auto;/>
                   </div>
-                  <h5>Biển kiểm soát: {{ file_content }}</h5>
-                  <h5>Tên người dùng: {{ item2.dvname }}</h5>
-                  <button class="btn btn-outline-secondary" onclick="Open({{ item2.id }})" >Mở</button>
-                  <button class="btn btn-outline-secondary" onclick="Close({{ item2.id }})">Đóng</button>
+                  <hr>
+                  <form method = 'POST' enctype="multipart/form-data">
+                    {% csrf_token %}
+                  <h5>Biển kiểm soát: {{ bien2_form.bienso }}</h5>
+                  <h5>Tên người dùng: {{ cus2.name }}</h5>
+                  <button class="btn btn-outline-secondary" onclick="Open(2)" >Mở</button>
+                  <button class="btn btn-outline-secondary" onclick="Close(2)">Đóng</button>
+                  <button type="submit" class="btn btn-outline-secondary">Chỉnh sửa</button>
                 </div>
               </div>
             </div>
@@ -117,3 +125,4 @@
     }
   </script>
 </html>
+
