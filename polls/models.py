@@ -104,7 +104,7 @@ class CamDB:
 
 class Cam(models.Model):
     id_gate = models.IntegerField() 
-    img = models.ImageField(height_field=None,width_field=None, max_length=100,blank=True)
+    img = models.ImageField(upload_to='static/image',height_field=None,width_field=None, max_length=100,blank=True)
     imgtime = models.DateTimeField()
     bienso=models.CharField(max_length=15)
     def update(self,img,bienso):

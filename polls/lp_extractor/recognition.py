@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from letter_segmentation import LETTER_SHAPE
+from polls.lp_extractor.letter_segmentation import LETTER_SHAPE
 import glob
 from sklearn import metrics
 from sklearn.model_selection import train_test_split

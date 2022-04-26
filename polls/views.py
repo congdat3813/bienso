@@ -12,16 +12,16 @@ from .forms import *
 from importlib import reload
 from django.shortcuts import render
 from mysite.wsgi import *
+from polls.lp_extractor.model import *
 def home(request):
     return render(request, "t/homepage.html")
 
 
 def gate(request):
-    # GateDB.receiveServer(1)
-    # GateDB.receiveServer(2)
-
-    
-    # read file
+    ex=LPExtractorModel()
+    lp= ex.extractLP('polls/static/image/abcd.jpeg')
+    with open('polls/static/txt/1.txt', 'w') as f:
+        f.write(lp)
     data_file1 = open('polls/static/txt/1.txt', 'r')       
     data1 = data_file1.read()
     data_file1.close()
@@ -51,7 +51,7 @@ def gate(request):
     if data1!= cam1.bienso:
         if cus1!= None:
             GateDB.updateServer(1,'1')
-            cam1.update("static/image/1.png",data1)
+            cam1.update("static/image/abcd.jpeg",data1)
             ParkingDB.create_parking(cus1.id,1,cam1.imgtime,cam1.bienso)
     if data2!= cam2.bienso :
         if cus2 != None:
@@ -74,7 +74,7 @@ def gate(request):
         if bienso.bienso1!= cam1.bienso:
             if cus1!= None:
                 GateDB.updateServer(1,'1')
-                cam1.update("static/image/1.png",data1)
+                cam1.update("static/image/abcd.jpeg",bienso.bienso1)
                 ParkingDB.create_parking(cus1.id,1,cam1.imgtime,cam1.bienso)
         with open('polls/static/txt/2.txt', 'w') as f:
             f.write(bienso.bienso2)
@@ -85,7 +85,7 @@ def gate(request):
         if bienso.bienso2!= cam2.bienso :
             if cus2!= None:
                 GateDB.updateServer(2,'3')
-                cam2.update("static/image/2.png",data2)
+                cam2.update("static/image/2.png",bienso.bienso2)
                 ParkingDB.create_parking(cus2.id,2,cam2.imgtime,cam2.bienso)
         # return redirect('../gate/')
     

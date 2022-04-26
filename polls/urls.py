@@ -12,5 +12,4 @@ urlpatterns = [
      path('cus/<int:id>/', update_cus, name='cus_info'),
      path('delete/<int:id>/', delete_cus, name='cus_delete'),
      path('history/', history, name='history'),
-     # path('submit/<int:id>/', submit, name='submit'),
 ]

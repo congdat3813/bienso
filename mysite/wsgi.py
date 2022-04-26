@@ -33,5 +33,5 @@ def disconnect(sid):
 def receiveImg(sid, data):
     img = base64.b64decode(data)
     im = Image.open(BytesIO(img))
-    im.save('polls/static/image/image1.jpeg', 'JPEG')
-    
+    im.save('polls/static/image/abcd.jpeg', 'JPEG')
+    im.save('static/image/abcd.jpeg', 'JPEG')

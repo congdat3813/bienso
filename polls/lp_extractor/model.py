@@ -1,8 +1,8 @@
-import detection as D
-import letter_segmentation as L
-import recognition as R
+import polls.lp_extractor.detection as D
+import polls.lp_extractor.letter_segmentation as L
+import polls.lp_extractor.recognition as R
 
-SVM_PATH = "svm.xml"
+SVM_PATH = "polls/lp_extractor/svm.xml"
 
 class LPExtractorModel():
     def __init__(self, max_min_plate_size=None, plate_shape=None, letter_shape=None, svm_path=SVM_PATH, debug=False):
