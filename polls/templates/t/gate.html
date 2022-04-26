@@ -59,7 +59,7 @@
                   <form method = 'POST' enctype="multipart/form-data">
                     {% csrf_token %}
                   <hr>
-                  <h5>Biển kiểm soát: {{ bien1_form.bienso }}</h5>
+                  <h5>Biển kiểm soát: {{ bienso_form.bienso1 }}</h5>
                   <h5>Tên người dùng: {{ cus1.name }}</h5>
                   <button class="btn btn-outline-secondary" onclick="Open(1)" >Mở</button>
                   <button class="btn btn-outline-secondary" onclick="Close(1)" >Đóng</button>
@@ -73,9 +73,7 @@
                     <img src="{{cam2.img.url}}" width="400" height=auto;/>
                   </div>
                   <hr>
-                  <form method = 'POST' enctype="multipart/form-data">
-                    {% csrf_token %}
-                  <h5>Biển kiểm soát: {{ bien2_form.bienso }}</h5>
+                  <h5>Biển kiểm soát: {{ bienso_form.bienso2 }}</h5>
                   <h5>Tên người dùng: {{ cus2.name }}</h5>
                   <button class="btn btn-outline-secondary" onclick="Open(2)" >Mở</button>
                   <button class="btn btn-outline-secondary" onclick="Close(2)">Đóng</button>

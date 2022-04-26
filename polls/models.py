@@ -8,7 +8,7 @@ from Adafruit_IO import MQTTClient
 
 AIO_FEED_ID = "microbit-led"
 AIO_USERNAME = "t2001kiet"
-AIO_KEY = "aio_wURr66XZ3evEAgOAX1tCGYsU1du4"
+AIO_KEY = "aio_TwDQ31JALIzOKvM7dYYmYsVWQRyf"
 
 def connected(client):
     print("Ket noi thanh cong ...")
@@ -158,6 +158,8 @@ class Parking(models.Model):
     bienso=models.CharField(max_length=15)
       
 class Bienso(models.Model):
-    bienso = models.CharField(max_length=15)
-    def updatebien(self,bienso):
-        self.bienso=bienso
+    bienso1 = models.CharField(max_length=15)
+    bienso2 = models.CharField(max_length=15)
+    def updatebien(self,bienso1,bienso2):
+        self.bienso1=bienso1
+        self.bienso2=bienso2

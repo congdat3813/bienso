@@ -29,10 +29,8 @@ def gate(request):
     data2 = data_file2.read()
     data_file2.close()
     
-    bienso1=Bienso.objects.get(id=1)
-    bienso2=Bienso.objects.get(id=2)
-    bienso1.updatebien(data1)
-    bienso2.updatebien(data2)
+    bienso=Bienso.objects.get(id=1)
+    bienso.updatebien(data1,data2)
     #Lay Cam cuoi cung
     cam1=Cam.objects.get(id=1)
     cam2=Cam.objects.get(id=2)
@@ -61,43 +59,44 @@ def gate(request):
             cam2.update("static/image/2.png",data2)
             ParkingDB.create_parking(cus2.id,2,cam2.imgtime,cam2.bienso)
             
-    bien1_form = Bienform(request.POST or None, instance = bienso1)
-    bien2_form = Bienform(request.POST or None, instance = bienso2)
+    bienso_form = Bienform(request.POST or None, instance = bienso)
     # cam2_form = Camform(request.POST or None, instance = rec4)
-    if bien1_form.is_valid():
-        bien1_form.save()
-        print(bienso1.bienso)
+    if bienso_form.is_valid():
+        print("bien 1,2 trc :",bienso.bienso1,bienso.bienso2)
+        bienso_form.save()
+        print("bien 1,2 trc :",bienso.bienso1,bienso.bienso2)
         with open('polls/static/txt/1.txt', 'w') as f:
-            f.write(bienso1.bienso)
+            f.write(bienso.bienso1)
         try:
-            cus1= Customer.objects.get(bienso=bienso1.bienso)
+            cus1= Customer.objects.get(bienso=bienso.bienso1)
         except:
             cus1=None
         if cus1!= None:
             GateDB.updateServer(1,'1')
-            cam1.update("static/image/1.jpeg",data1)
+            cam1.update("static/image/1.png",data1)
             ParkingDB.create_parking(cus1.id,1,cam1.imgtime,cam1.bienso)
-            # Parking.objects.create(id_cus=cus1.id, id_gate=1, imgtime=cam1.imgtime, bienso=cam1.bienso)
-        return redirect('../gate/')
-    
-    if bien2_form.is_valid():
-        bien2_form.save()
         with open('polls/static/txt/2.txt', 'w') as f:
-            f.write(bienso2.bienso)
+            f.write(bienso.bienso2)
         try:
-            cus2= Customer.objects.get(bienso=bienso2.bienso)
+            cus2= Customer.objects.get(bienso=bienso.bienso2)
         except:
-            cus1=None
-        if cus1!= None:
+            cus2=None
+        if cus2!= None:
             GateDB.updateServer(2,'3')
-            cam2.update("static/image/2.jpeg",data2)
+            cam2.update("static/image/2.png",data2)
             ParkingDB.create_parking(cus2.id,2,cam2.imgtime,cam2.bienso)
         return redirect('../gate/')
     
-    context = {"cus1": cus1,"cus2": cus2,"cam1": cam1,"cam2": cam2, 'bien1_form':bien1_form,'bien2_form':bien2_form}
+    context = {"cus1": cus1,"cus2": cus2,"cam1": cam1,"cam2": cam2, 'bienso_form':bienso_form}
     # context = {"item1": rec1,"item2": rec2, "item3":rec3,"item4":rec4, "data1": data1,"data2": data2}
     return render(request, "t/gate.html", context)
 
+# def submit(request,id):
+#     bienso1=Bienso.objects.get(id=id)
+#     bien1_form = Bienform(request.POST or None, instance = bienso1)
+#     if bien1_form.is_valid():
+#         bien1_form.save()
+#         return redirect('../gate/')
 
 def Open(request):
     import json
