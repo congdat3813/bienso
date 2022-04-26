@@ -71,21 +71,23 @@ def gate(request):
             cus1= Customer.objects.get(bienso=bienso.bienso1)
         except:
             cus1=None
-        if cus1!= None:
-            GateDB.updateServer(1,'1')
-            cam1.update("static/image/1.png",data1)
-            ParkingDB.create_parking(cus1.id,1,cam1.imgtime,cam1.bienso)
+        if bienso.bienso1!= cam1.bienso:
+            if cus1!= None:
+                GateDB.updateServer(1,'1')
+                cam1.update("static/image/1.png",data1)
+                ParkingDB.create_parking(cus1.id,1,cam1.imgtime,cam1.bienso)
         with open('polls/static/txt/2.txt', 'w') as f:
             f.write(bienso.bienso2)
         try:
             cus2= Customer.objects.get(bienso=bienso.bienso2)
         except:
             cus2=None
-        if cus2!= None:
-            GateDB.updateServer(2,'3')
-            cam2.update("static/image/2.png",data2)
-            ParkingDB.create_parking(cus2.id,2,cam2.imgtime,cam2.bienso)
-        return redirect('../gate/')
+        if bienso.bienso2!= cam2.bienso :
+            if cus2!= None:
+                GateDB.updateServer(2,'3')
+                cam2.update("static/image/2.png",data2)
+                ParkingDB.create_parking(cus2.id,2,cam2.imgtime,cam2.bienso)
+        # return redirect('../gate/')
     
     context = {"cus1": cus1,"cus2": cus2,"cam1": cam1,"cam2": cam2, 'bienso_form':bienso_form}
     # context = {"item1": rec1,"item2": rec2, "item3":rec3,"item4":rec4, "data1": data1,"data2": data2}
