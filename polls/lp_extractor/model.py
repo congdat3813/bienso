@@ -1,21 +1,25 @@
-import polls.lp_extractor.detection as D
+# import polls.lp_extractor.detection as D
+import polls.lp_extractor.yolodetection as Y
 import polls.lp_extractor.letter_segmentation as L
 import polls.lp_extractor.recognition as R
 
 SVM_PATH = "polls/lp_extractor/svm.xml"
+YOLO_PATH = "polls/lp_extractor/yolo_best.pt"
 
 class LPExtractorModel():
-    def __init__(self, max_min_plate_size=None, plate_shape=None, letter_shape=None, svm_path=SVM_PATH, debug=False):
+    def __init__(self, model_path=YOLO_PATH, plate_shape=None, letter_shape=None, svm_path=SVM_PATH, debug=False):
         self.svm_path = svm_path
         self.debug = debug
 
         # Detector
-        params = {'debug': debug}
-        if max_min_plate_size is not None:
-            params['max_plate_size'] = max_min_plate_size[0]
-            params['min_plate_size'] = max_min_plate_size[1]
+        # if max_min_plate_size is not None:
+        #     params['max_plate_size'] = max_min_plate_size[0]
+        #     params['min_plate_size'] = max_min_plate_size[1]
 
-        self.detector = D.Detector(**params)
+        # self.detector = D.Detector(**params)
+
+        params = {'debug': debug, 'model_path': model_path}
+        self.detector = Y.YOLODetector(**params)
 
         # Segmentor
         params = {'debug': debug}
