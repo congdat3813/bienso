@@ -26,9 +26,9 @@ def test_file(extractor, img_path):
     return extractor.extractLP(img_path)
 
 if __name__ == "__main__":
-    extractor = LPExtractorModel(debug=True)
+    extractor = LPExtractorModel(debug=False)
     
-    img_path = "data_plate/0010_00004_b.jpg"
+    img_path = "data_plate/0000_00532_b.jpg"
     
     lp = test_file(extractor, img_path)
     print(lp)
