@@ -31,6 +31,7 @@ class LPExtractorModel():
         if letter_shape is not None:
             params['letter_shape'] = letter_shape
         self.recognizer = R.Recognizer(**params)
+        self.recognizer.load() # Load model
 
     def setDebug(self, value):
         self.debug = value

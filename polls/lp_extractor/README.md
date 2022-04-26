@@ -11,3 +11,7 @@ extractor = LPExtractorModel()
 img_path = "data_plate/0000_00532_b.jpg"
 lp = extractor.extractLP(img_path)
 ```
+### Train recognizer
+```
+python train_recognizer.py
+```
