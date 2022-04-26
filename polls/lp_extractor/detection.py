@@ -65,7 +65,7 @@ class Detector():
                 break
 
         if screenCnt is None:
-            return False # No plate detected
+            return None # No plate detected
 
         cv2.drawContours(img, [screenCnt], -1, (0, 255, 0), 3)
 
