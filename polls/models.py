@@ -5,10 +5,12 @@ from django.utils import timezone
 import  sys
 from Adafruit_IO import Client, Feed, RequestError
 from Adafruit_IO import MQTTClient
-
-AIO_FEED_ID = "microbit-led"
+from polls.lp_extractor.model import *
+AIO_FEED_ID = "microbit-temp"
 AIO_USERNAME = "t2001kiet"
-AIO_KEY = "aio_TwDQ31JALIzOKvM7dYYmYsVWQRyf"
+AIO_KEY = "aio_VYbf70nmKSXUOT2XMWc1FAkRE6js"
+
+ex=LPExtractorModel(debug=False)
 
 def connected(client):
     print("Ket noi thanh cong ...")

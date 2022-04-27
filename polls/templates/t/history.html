@@ -68,7 +68,7 @@
         <tbody>
           {% for i in item %}
             <tr>
-              <td>{{i.bienso}}</td>
+              <td><a style="text-decoration: none; color: black" href="../cus/{{i.id_cus}}">{{i.bienso}}</a></td>
               {% if i.id_gate  == 1 %}
                 <td>Vào</td>
               {% else %}

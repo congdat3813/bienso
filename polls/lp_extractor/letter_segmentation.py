@@ -64,14 +64,14 @@ class LetterSegmentor():
             cv2.waitKey(0)
             cv2.destroyAllWindows()
 
-        lw, uw, lh, uh = [10, 50, 60, 100] # lower wicth, upper width, lower height, upper height
+        lw, uw, lh, uh = [10, 50, 35, 100] # lower wicth, upper width, lower height, upper height
         cnts = sorted(cnts, key=cv2.contourArea, reverse=True)[:15] # select top 15 contours sorted by area
 
         list_letters = []
         x_letters = []
         y_letters = []
         visited = []
-        min_h = int(0.5*(self.plate_shape[1]//2)) # minimum height is 60% of line
+        min_h = int(0.3*(self.plate_shape[1]//2)) # minimum height is 60% of line
         for cntr in cnts:
             # get bounding box in rectangle
             x, y, w, h = cv2.boundingRect(cntr)

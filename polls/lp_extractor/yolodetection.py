@@ -41,6 +41,9 @@ class YOLODetector():
         img_paths = [img_path]
         output = self.model(img_paths)
         
+        if self.debug:
+            print(output)
+        
         bounding_box = output.xyxy[0][0][:4]
         if self.debug:
             print(bounding_box)

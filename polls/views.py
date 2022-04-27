@@ -18,8 +18,13 @@ def home(request):
 
 
 def gate(request):
-    ex=LPExtractorModel()
-    lp= ex.extractLP('polls/static/image/abcd.jpeg')
+    
+    try:
+        lp= ex.extractLP('polls/static/image/abcd.jpeg')
+    except Exception as e: 
+        print(e)
+        lp= ''
+    
     with open('polls/static/txt/1.txt', 'w') as f:
         f.write(lp)
     data_file1 = open('polls/static/txt/1.txt', 'r')       
@@ -187,7 +192,7 @@ def delete_cus(request, id):
     return redirect('../../cus')
 
 def history(request):
-    rec = Parking.objects.all()
+    rec = Parking.objects.all().order_by('-imgtime')
     context = {"item": rec}
     return render(request, "t/history.html", context)
 
